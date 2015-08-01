@@ -6,14 +6,14 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'eclipse-wtp'
-    apply plugin: 'idea'
-    apply plugin: "jacoco"
+    apply plugin: 'jacoco'
     
     //Java version 1.7'
     //sourceCompatibility = 1.7
     
     repositories {
         mavenCentral()
+        jcenter()
     }
     
     //Create a source set for the functional test files
@@ -35,40 +35,41 @@ subprojects {
     }
     
     dependencies {
-        compile 'commons-codec:commons-codec:1.7'
-        compile 'commons-logging:commons-logging:1.1.1'
-        compile 'org.apache.httpcomponents:httpcore:4.2.2'
-        compile 'org.apache.httpcomponents:httpclient:4.2.2'
-        compile 'com.fasterxml.jackson.core:jackson-annotations:2.1.1'
-        compile 'com.fasterxml.jackson.core:jackson-core:2.1.2'
-        compile 'com.fasterxml.jackson.core:jackson-databind:2.1.0'
+        compile "commons-codec:commons-codec:1.10"
+        compile "commons-logging:commons-logging:1.1.1"
+        compile "org.apache.httpcomponents:httpcore:4.2.2"
+        compile "org.apache.httpcomponents:httpclient:4.2.2"
+        compile "com.fasterxml.jackson.core:jackson-annotations:2.1.1"
+        compile "com.fasterxml.jackson.core:jackson-core:2.1.2"
+        compile "com.fasterxml.jackson.core:jackson-databind:2.1.0"
         
         //runtime files('libs/a.jar', 'libs/b.jar')
         compile fileTree(dir: rootDir.toString()+'/libs', includes: ['*.jar']) //db4o jar that isn't on Maven, and any other new dependencies placed in the libs directory
         
-        testCompile 'junit:junit:4.11'
-        testCompile 'org.mockito:mockito-core:1.9.5'
+        testCompile "junit:junit:4.12"
+        testCompile "org.mockito:mockito-core:1.10.19"
     }
     
     eclipse{
-        
         project{
             //Mark as Gradle project for Gradle plugin in case it is installed
-            natures 'org.springsource.ide.eclipse.gradle.core.nature'
+            //natures 'org.springsource.ide.eclipse.gradle.core.nature'
+            buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+            natures 'org.eclipse.buildship.core.gradleprojectnature'
         }
         
         classpath{
             downloadSources = true
-            downloadJavadoc = true //This is false otherwise, we love to read JavaDoc to help use understand libraries :)
+            downloadJavadoc = true //false by default
         }
     }
     
     test{
-        ignoreFailures = true //Lets builds pass with failing tests
+        //ignoreFailures = true //Lets builds pass with failing tests
     }
     
     jacoco {
-        toolVersion = "0.7.1.201405082137"
+        toolVersion = "0.7.5.201505241946"
     }
     
     jacocoTestReport {

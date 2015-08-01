@@ -34,18 +34,6 @@ dependencies{
     }
 }
 
-//Workaround so that Eclipse knows how to run the Gradle tasks 'modules' in order to prepare modules. 'modules' is dependency for running Janeway
-//TODO Pretty sure there is a better way of doing this
-eclipse{
-    project{
-        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-            buildCommand 'org.eclipse.ui.externaltools.ExternalToolBuilder', LaunchConfigHandle: '<project>/.externalToolBuilders/Gradle - Prepare Modules - Windows.launch'
-        } else {
-            buildCommand 'org.eclipse.ui.externaltools.ExternalToolBuilder', LaunchConfigHandle: '<project>/.externalToolBuilders/Gradle - Prepare Modules - Unix.launch'
-        }
-    }
-}
-
 //Add the dependencies to the .jar manifest
 jar {
     manifest{
