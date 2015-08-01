@@ -1,4 +1,4 @@
-# WPI Suite  [![Build Status](https://travis-ci.org/robertsmieja/wpi-suite.svg?branch=dev-tests)](https://travis-ci.org/robertsmieja/wpi-suite)
+# WPI Suite  [![Build Status](https://travis-ci.org/robertsmieja/wpi-suite.svg?branch=dev-tests)](https://travis-ci.org/robertsmieja/wpi-suite) [![codecov.io](http://codecov.io/github/robertsmieja/wpi-suite/coverage.svg?branch=dev-tests)](http://codecov.io/github/robertsmieja/wpi-suite?branch=dev-tests)
 
 ## What is WPI Suite?
 
