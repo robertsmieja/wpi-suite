@@ -10,4 +10,5 @@ cache:
       - $HOME/.gradle/caches
 
 after_script:
+  - ./gradlew jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
