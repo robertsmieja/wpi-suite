@@ -24,7 +24,6 @@ import edu.wpi.cs.wpisuitetng.janeway.gui.container.toolbar.ToolbarGroupView;
 import edu.wpi.cs.wpisuitetng.modules.defecttracker.tabs.MainTabController;
 import edu.wpi.cs.wpisuitetng.modules.defecttracker.tabs.MainTabView;
 
-
 /**
  * Controller for the defect tracker toolbar.
  * Keeps track of the displayed tab in a MainTabController and displays the
@@ -34,42 +33,45 @@ import edu.wpi.cs.wpisuitetng.modules.defecttracker.tabs.MainTabView;
  */
 public class ToolbarController extends DefaultToolbarController implements ChangeListener {
 
-	private ToolbarGroupView relevantTabGroup;
-	
-	/**
-	 * Control the given DefaultToolbarView based on the state of the tabs in tabController.
-	 * @param toolbarView The toolbar to add/remove groups from
-	 * @param tabController The MainTabController to listen to for changes
-	 */
-	public ToolbarController(DefaultToolbarView toolbarView, MainTabController tabController) {
-		super(toolbarView);
-		tabController.addChangeListener(this);
-	}
+    private ToolbarGroupView relevantTabGroup;
 
-	private void setRelevantTabGroup(ToolbarGroupView group) {
-		// keep track of only one toolbar group for the active tab
-		if(relevantTabGroup != null) {
-			setRelevant(relevantTabGroup, false);
-		}
-		relevantTabGroup = group;
-		if(relevantTabGroup != null) {
-			setRelevant(relevantTabGroup, true);
-		}
-	}
-	
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		// TODO: there has to be a cleaner way to do this
-		if(e.getSource() instanceof MainTabView) {
-			MainTabView view = (MainTabView) e.getSource();
-			Component selectedComponent = view.getSelectedComponent();
-			if(selectedComponent instanceof IToolbarGroupProvider) {
-				IToolbarGroupProvider provider = (IToolbarGroupProvider) selectedComponent;
-				setRelevantTabGroup(provider.getGroup());
-			} else {
-				setRelevantTabGroup(null);
-			}
-		}
-	}
+    /**
+     * Control the given DefaultToolbarView based on the state of the tabs in tabController.
+     * @param toolbarView The toolbar to add/remove groups from
+     * @param tabController The MainTabController to listen to for changes
+     */
+    public ToolbarController(DefaultToolbarView toolbarView, MainTabController tabController) {
+        super(toolbarView);
+        tabController.addChangeListener(this);
+    }
 
+    protected void setRelevantTabGroup(ToolbarGroupView group) {
+        // keep track of only one toolbar group for the active tab
+        if (relevantTabGroup != null) {
+            setRelevant(relevantTabGroup, false);
+        }
+        relevantTabGroup = group;
+        if (relevantTabGroup != null) {
+            setRelevant(relevantTabGroup, true);
+        }
+    }
+
+    public ToolbarGroupView getRelevantTabGroup() {
+        return relevantTabGroup;
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        // TODO: there has to be a cleaner way to do this
+        if (e.getSource() instanceof MainTabView) {
+            MainTabView view = (MainTabView) e.getSource();
+            Component selectedComponent = view.getSelectedComponent();
+            if (selectedComponent instanceof IToolbarGroupProvider) {
+                IToolbarGroupProvider provider = (IToolbarGroupProvider) selectedComponent;
+                setRelevantTabGroup(provider.getGroup());
+            } else {
+                setRelevantTabGroup(null);
+            }
+        }
+    }
 }
