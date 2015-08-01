@@ -75,6 +75,11 @@ subprojects {
     jacocoTestReport {
         //Exclude tests from code coverage report
         sourceDirectories = files(project.sourceSets.main.allJava.srcDirs)
+        reports{
+            html.enabled true
+            xml.enabled true
+            csv.enabled true
+        }
     }
     
     //Using << ensures that the task will not be executed when being evaluated
