@@ -5,9 +5,9 @@ jdk:
   - oraclejdk7
   - openjdk7
 
-cache:
-    directories:
-      - $HOME/.gradle/caches
+#cache:
+#    directories:
+#      - $HOME/.gradle/caches
 
 after_script:
   - ./gradlew jacocoTestReport
