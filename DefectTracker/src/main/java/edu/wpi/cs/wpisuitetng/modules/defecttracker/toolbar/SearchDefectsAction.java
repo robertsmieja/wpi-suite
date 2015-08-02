@@ -34,25 +34,32 @@ import edu.wpi.cs.wpisuitetng.modules.defecttracker.tabs.Tab;
  */
 @SuppressWarnings("serial")
 public class SearchDefectsAction extends AbstractAction {
-	
-	private final MainTabController controller;
-	
-	/**
-	 * Construct a search defects action
-	 * @param controller the controller to call when the action is performed
-	 */
-	public SearchDefectsAction(MainTabController controller) {
-		super("Search Defects");
-		this.controller = controller;
-		putValue(MNEMONIC_KEY, KeyEvent.VK_D);
-	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		Tab tab = controller.addTab();
-		SearchDefectsView view = new SearchDefectsView(controller, tab);
-		tab.setComponent(view);
-		view.requestFocus();
-	}
+    private final MainTabController controller;
 
+    /**
+     * Construct a search defects action
+     * @param controller the controller to call when the action is performed
+     */
+    public SearchDefectsAction(MainTabController controller) {
+        super("Search Defects");
+        this.controller = controller;
+        putValue(MNEMONIC_KEY, KeyEvent.VK_D);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        Tab tab = controller.addTab();
+        SearchDefectsView view = createSearchDefectsView(controller, tab);
+        tab.setComponent(view);
+        view.requestFocus();
+    }
+
+    public MainTabController getController() {
+        return this.controller;
+    }
+
+    protected SearchDefectsView createSearchDefectsView(MainTabController controller, Tab tab) {
+        return new SearchDefectsView(controller, tab); //TODO Refactor out 'new'
+    }
 }
