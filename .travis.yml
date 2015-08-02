@@ -5,7 +5,7 @@ jdk:
   - oraclejdk7
   - openjdk7
 
- script: ./gradlew assemble check --stacktrace
+script: ./gradlew assemble check --stacktrace
   
 #cache:
 #    directories:
